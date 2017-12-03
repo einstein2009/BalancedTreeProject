@@ -321,3 +321,27 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 	convertToRBT(root->getRightMidChildPtr());
 	convertToRBT(root->getRightChildPtr());
 }
+
+template<class ItemType>
+int A234Tree<ItemType>::getRootDataCount() const
+{
+	return rootPtr->getDataCount();
+}
+
+template<class ItemType>
+int A234Tree<ItemType>::getRootSmallItem() const
+{
+	return rootPtr->getSmallItem();
+}
+
+template<class ItemType>
+int A234Tree<ItemType>::getRootMidItem() const
+{
+	return rootPtr->getMidItem();
+}
+
+template<class ItemType>
+int A234Tree<ItemType>::getRootLargeItem() const
+{
+	return rootPtr->getLargeItem();
+}
