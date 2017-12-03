@@ -329,19 +329,19 @@ int A234Tree<ItemType>::getRootDataCount() const
 }
 
 template<class ItemType>
-int A234Tree<ItemType>::getRootSmallItem() const
+ItemType A234Tree<ItemType>::getRootSmallItem() const
 {
 	return rootPtr->getSmallItem();
 }
 
 template<class ItemType>
-int A234Tree<ItemType>::getRootMidItem() const
+ItemType A234Tree<ItemType>::getRootMidItem() const
 {
 	return rootPtr->getMidItem();
 }
 
 template<class ItemType>
-int A234Tree<ItemType>::getRootLargeItem() const
+ItemType A234Tree<ItemType>::getRootLargeItem() const
 {
 	return rootPtr->getLargeItem();
 }
