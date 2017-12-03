@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="A234Tree.h" />
+    <ClInclude Include="BinaryNode.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="RedBlackNode.h" />
     <ClInclude Include="stdafx.h" />

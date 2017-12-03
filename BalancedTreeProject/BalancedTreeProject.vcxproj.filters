@@ -30,6 +30,12 @@
     <ClInclude Include="TriNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="A234Tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

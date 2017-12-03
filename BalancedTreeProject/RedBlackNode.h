@@ -7,8 +7,7 @@
 @file RedBlackNode.h */
 
 // PARTIALLY COMPLETE
-
-#pragma once
+#include "BinaryNode.h"
 
 enum Color { RED, BLACK };
 
@@ -16,91 +15,76 @@ template<class ItemType>
 class RedBlackNode : public BinaryNode<ItemType>
 {
 private:
-	Color leftColor, rightColor;
+	Color leftColor, rightColor, color;
 
 public:
 	RedBlackNode();
 	RedBlackNode(const ItemType newItem);
-	RedBlackNode(const ItemType newItem, RedBlackNode<ItemType>* redPtr, RedBlackNode<ItemType>* blackPtr, );
-	
+	RedBlackNode(const ItemType newItem, RedBlackNode<ItemType>* leftPtr, RedBlackNode<ItemType>* rightPtr);
+
 	// Get and set methods for leftColor and rightColor
-	ItemType getLeftColor() const;
-	ItemType getRightColor() const;
+	Color getLeftColor() const;
+	Color getRightColor() const;
+	Color getColor() const;
 
-	void setLeftColor(ItemType newItem);
-	void setRightColor(ItemType newItem);
-
-	RedBlackNode<ItemType>* getRedPtr() const;
-	RedBlackNode<ItemType>* getBlackPtr() const;
-
-	void setRedPtr(RedBlackNode<ItemType>* red);
-	void setBlackPtr(RedBlackNode<ItemType>* black);
+	void setLeftColor(Color col);
+	void setRightColor(Color col);
+	void setColor(Color col);
 	// . . .
 
 }; // end RedBlackNode
 
 template<class ItemType>
-RedBlackNode<ItemType>::RedBlackNode()
+RedBlackNode<ItemType>::RedBlackNode(const ItemType newItem) : BinaryNode(newItem)
 {
-} // end default constructor
-
-template<class ItemType>
-RedBlackNode<ItemType>::RedBlackNode(const ItemType newItem)
-{
-
+	color = Color::RED;
+	leftColor = Color::BLACK;
+	rightColor = Color::BLACK;
 }
 
 template<class ItemType>
-RedBlackNode<ItemType>::RedBlackNode(const ItemType newItem, RedBlackNode<ItemType>* redPtr, RedBlackNode<ItemType>* blackPtr, )
+RedBlackNode<ItemType>::RedBlackNode(const ItemType newItem, RedBlackNode<ItemType>* leftPtr, RedBlackNode<ItemType>* rightPtr) : BinaryNode(newItem)
 {
+	color = Color::RED;
+	leftColor = leftPtr->getColor();
+	rightColor = rightPtr->getColor();
+	setLeftChildPtr(leftPtr);
+	setRightChildPtr(rightPtr);
+}
 
+
+template<class ItemType>
+Color RedBlackNode<ItemType>::getLeftColor() const
+{
+	return leftColor;
 }
 
 template<class ItemType>
-ItemType RedBlackNode<ItemType>::getLeftColor() const
+Color RedBlackNode<ItemType>::getRightColor() const
 {
-	return leftColor();
+	return rightColor;
 }
 
 template<class ItemType>
-ItemType RedBlackNode<ItemType>::getRightColor() const
+Color RedBlackNode<ItemType>::getColor() const
 {
-	return rightColor();
+	return color;
 }
 
 template<class ItemType>
-
-void RedBlackNode<ItemType>::setLeftColor(ItemType newItem)
+void RedBlackNode<ItemType>::setLeftColor(Color col)
 {
-	leftColor = newItem;
+	leftColor = col;
 }
 
 template<class ItemType>
-void RedBlackNode<ItemType>::setRightColor(ItemType newItem)
+void RedBlackNode<ItemType>::setRightColor(Color col)
 {
-	rightColor = newItem;
+	rightColor = col;
 }
 
 template<class ItemType>
-RedBlackNode<ItemType>* RedBlackNode<ItemType>::getRedPtr() const
+void RedBlackNode<ItemType>::setColor(Color col)
 {
-	return redptr;
-}
-
-template<class ItemType>
-RedBlackNode<ItemType>* RedBlackNode<ItemType>::getBlackPtr() const
-{
-	return blackptr;
-}
-
-template<class ItemType>
-void RedBlackNode<ItemType>::setRedPtr(RedBlackNode<ItemType>* red)
-{
-	redptr = red;
-}
-
-template<class ItemType>
-void RedBlackNode<ItemType>::setBlackPtr(RedBlackNode<ItemType>* black)
-{
-	blackptr = black;
+	color = col;
 }
