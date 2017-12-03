@@ -24,7 +24,7 @@ public:
 	QuadNode<ItemType>* locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void convertToRBT(QuadNode<ItemType>* root);
 	int getRootDataCount() const;
-	ItemType getRootSmallItem() comst;
+	ItemType getRootSmallItem() const;
 	ItemType getRootMidItem() const;
 	ItemType getRootLargeItem() const;
 };
