@@ -100,5 +100,41 @@ void RedBlackTree<ItemType>:: Delete(ItemType item)
 template<class ItemType>
 void RedBlackTree<ItemType>:: fixAfterDelete(ItemType item)
 {
+	RedBlackNode* newNode;
+	while (p != root && p->getColor() == BLACK)
+	{
+		if ((p->getParent())->leftChildPtr() == p)
+		{
+			newNode = (p->getParent())->rightChildPtr();
+			if (newNode->getColor() == RED)
+			{
+				newNode->setColor(BLACK);
+				(p->getParent())->setColor(RED);
+				rotateLeft(root, p->getParent());
+			}
+			if (newNode->getRightColor() == BLACK && newNode->getLeftColor() == BLACK)
+			{
+				newNode->setColor(RED);
+				p = p->getParent();
+			}
+			else
+			{
+				if (newNode->getRightcolor() == BLACK)
+				{
+					newNode->setLeftColor(BLACK);
+					newNode->setColor(RED);
+					rotateRight(root, newNode);
+					newNode = (p->getParent())->getRightChildPtr();
+				}
+				newNode->setColor((p->getParent())->getColor());
+				(p->getParent())->setColor(BLACK);
+				newNode->setRightColor(BLACK);
+				rotateLeft(root, p->getParent());
+				p = root;
+			}	
+		}
+
+		p->setColor(BLACK);
+		root->setColor(BLACK);
 }
 
