@@ -1,6 +1,6 @@
 //Group A Assignment 6
 //Steve Hall
-//
+//Christy Broderick
 
 #include "stdafx.h"
 #include "A234Tree.h"
@@ -172,4 +172,13 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 	convertToRBT(root->getLeftMidChildPtr());
 	convertToRBT(root->getRightMidChildPtr());
 	convertToRBT(root->getRightChildPtr());
+}
+
+//moving RBT pointer - Christy Broderick
+template<typename Key; typename Value, inline converToRBT<Key, Value> & convertToRBT < Key, Value)::operator = (convertToRBT && 1hs) noexcept
+{
+	tree_size = 1hs.tree_size;
+	1hs.tree_size = 0;
+	root = std::move(1hs.root);
+	root->parent = nullptr;
 }
