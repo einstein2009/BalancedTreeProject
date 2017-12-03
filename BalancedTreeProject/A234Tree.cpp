@@ -126,6 +126,60 @@ QuadNode<ItemType>* A234Tree<ItemType>::
 locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
 	//-------------------------------------
+	//FIRST CHECK MUST BE IF THE NODE IS FULL WHILE TRAVERSING THE TREE,
+	//IF IT'S FULL, IT MUST BE SPLIT SO WE DON'T HAVE TO TRAVEL BACK UP THE TREE.
+	//-------------------------------------
+	//Node is full small, mid, and large items, 
+	//left, leftMid, rightMid, and right children
+	//-------------------------------------
+
+	if (subTreeNode->getDataCount() == 3)
+	{
+		//Must check if subTreeNode is root
+		if (subTreeNode->isRoot())
+		{
+			//If so must create new root
+			QuadNode<ItemType>* newRoot = new QuadNode<ItemType>(subTreeNode->getMidItem());
+			//And a new right child node, as the root will be the left node
+			QuadNode<ItemType>* rightChildNode = new QuadNode<ItemType>(subTreeNode->getLargeItem());
+			
+			//New "Binary" root
+			newRoot->setLeftChildPtr(subTreeNode);
+			newRoot->setRightChildPtr(rightChildNode);
+
+			//Fill out rightChildNode, and update parents
+			rightChildNode->setRightChildPtr(subTreeNode->getRightChildPtr());
+			if (subTreeNode->getRightChildPtr() != nullptr)
+				subTreeNode->getRightChildPtr()->setParentPtr(rightChildNode);
+			rightChildNode->setLeftChildPtr(subTreeNode->getRightMidChildPtr());
+			if (subTreeNode->getRightMidChildPtr() != nullptr)
+				subTreeNode->getRightMidChildPtr()->setParentPtr(rightChildNode);
+			rightChildNode->setParentPtr(newRoot);
+
+			//Must update subTreeNode
+			subTreeNode->setRightChildPtr(subTreeNode->getLeftMidChildPtr());
+			subTreeNode->setParentPtr(newRoot);
+			subTreeNode->setLeftMidChildPtr(nullptr);
+			subTreeNode->setRightMidChildPtr(nullptr);
+			subTreeNode->setMidItem(NULL);
+			subTreeNode->setLargeItem(NULL);
+			
+			this->rootPtr = newRoot;
+
+			//Show must go on after split.
+			if (target < newRoot->getSmallItem())
+				return locateLeaf(subTreeNode, target);
+			else
+				return locateLeaf(rightChildNode, target);
+		}
+		//Tree isn't a root, need a parent node to track the chain
+		else
+		{
+			QuadNode<ItemType>* parentNode = subTreeNode->getParentPtr();
+		}
+	}
+
+	//-------------------------------------
 	//Node is a Leaf
 	//-------------------------------------
 
@@ -145,8 +199,6 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 		if (target > subTreeNode->getSmallItem())
 			return locateLeaf(subTreeNode->getRightChildPtr(), target);
 	}
-	else if (subTreeNode->getDataCount() == 1 && subTreeNode->isLeaf())
-		return subTreeNode;
 
 	//-------------------------------------
 	//Node has 2 items, always small and largest items,
@@ -164,16 +216,6 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 		//Larger than large, send to the right
 		if (target > subTreeNode->getLargeItem())
 			return locateLeaf(subTreeNode->getRightChildPtr(), target)
-	}
-
-	//-------------------------------------
-	//Node is full small, mid, and large items, 
-	//left, leftMid, rightMid, and right children
-	//-------------------------------------
-
-	if (subTreeNode->getDataCount() == 3)
-	{
-
 	}
 }
 

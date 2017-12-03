@@ -27,9 +27,6 @@
     <ClInclude Include="RedBlackNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TriNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="A234Tree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
