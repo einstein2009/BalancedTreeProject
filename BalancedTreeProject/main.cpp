@@ -29,7 +29,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "TreeInterface.h"
 #include "A234Tree.h"
 #include "RedBlackTree.h"
 
@@ -204,6 +203,8 @@ int main()
 	//convert 2-3-4 tree to red-black by passing pointer to constructor of red-black tree
 	CpTreePtr->convertToRBT(CpTreePtr->getRoot());
 
+	RedBlackTree<int> *CpRedBlackTreePtr;
+
 	//display list after conversion
 	cout << "Displaying Red-Black Tree values..." << endl;
 	CpRedBlackTreePtr->display();
@@ -268,4 +269,3 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength)
 	//item not found
 	return -1;
 }
-
