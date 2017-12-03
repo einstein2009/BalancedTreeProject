@@ -32,7 +32,7 @@ private:
 	Node *root;
 	void rotateLeft(Node *&, Node *&);
 	void rotateRight(Node *&, Node *&);
-	void fixViolation(Node *&, Node *&)
+	void fixViolations(Node *&, Node *&)
 
 public:
 	RedBlackTree() { root = NULL; }
@@ -93,7 +93,7 @@ void RedBlackTree::rotateRight(Node *&root, Node *&point)
 
 //This section involves detecting and fixing violations with the RedBlackTree. I think this also should be in the main.cpp file.
 
-void RedBlackTree::fixBSTViolations(Node *&root, Node *&point)
+void RedBlackTree::fixViolations(Node *&root, Node *&point)
 {
 	Node *parent_point = NULL;
 	Node *grandParent_point = NULL;
