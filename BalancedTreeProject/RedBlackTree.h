@@ -39,6 +39,7 @@ public:
 	void insert(const int &n);
 	void inorder();
 	void levelOrder();
+	void delete(ItemType item);
 };
 
 
