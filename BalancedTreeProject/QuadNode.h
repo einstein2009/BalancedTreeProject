@@ -13,8 +13,6 @@
 #ifndef _QUAD_NODE
 #define _QUAD_NODE
 
-
-
 template<class ItemType>
 class QuadNode
 {
@@ -24,6 +22,7 @@ private:
 	QuadNode<ItemType>* leftMidChildPtr;       // Middle-left-child pointer
 	QuadNode<ItemType>* rightMidChildPtr;      // Middle-right-child pointer
 	QuadNode<ItemType>* rightChildPtr;         // Right-child pointer
+	QuadNode<ItemType>* parentPtr;
 	int dataCount;
 											   
 // Constructors, accessor methods, and mutator methods are here.
@@ -35,7 +34,7 @@ public:
 	ItemType getSmallItem() const;
 	ItemType getMidItem() const;
 	ItemType getLargeItem() const;
-
+	
 	void setSmallItem(ItemType newItem);
 	void setMidItem(ItemType newItem);
 	void setLargeItem(ItemType newItem);
@@ -44,15 +43,17 @@ public:
 	void setRightChildPtr(QuadNode<ItemType>* right);
 	void setLeftMidChildPtr(QuadNode<ItemType>* leftMid);
 	void setRightMidChildPtr(QuadNode<ItemType>* rightMid);
+	void setParentPtr(QuadNode<ItemType>* parent);
 
 	QuadNode<ItemType>* getLeftChildPtr() const;
 	QuadNode<ItemType>* getRightChildPtr() const;
 	QuadNode<ItemType>* getLeftMidChildPtr() const;
 	QuadNode<ItemType>* getRightMidChildPtr() const;
-		
+	QuadNode<ItemType>* getParentPtr() const;
+
 	bool isLeaf();
+	bool isRoot();
 	int getDataCount();
 
 }; // end QuadNode
 #endif _QUAD_NODE
-

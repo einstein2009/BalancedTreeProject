@@ -7,23 +7,26 @@
 
 
 template<class ItemType>
-QuadNode<ItemType>::QuadNode()
+QuadNode<ItemType>::QuadNode(): smallItem(NULL), middleItem(NULL), largeItem(NULL),
+leftChildPtr(nullptr), leftMidChildPtr(nullptr), rightMidChildPtr(nullptr), rightChildPtr(nullptr),
+parentPtr(nullptr), dataCount(1)
 {
-	dataCount = 1;
 }
 
 template<class ItemType>
-QuadNode<ItemType>::QuadNode(const ItemType newItem)
+QuadNode<ItemType>::QuadNode(const ItemType newItem): smallItem(newItem), middleItem(NULL), largeItem(NULL),
+leftChildPtr(nullptr), leftMidChildPtr(nullptr), rightMidChildPtr(nullptr), rightChildPtr(nullptr),
+parentPtr(nullptr), dataCount(1)
 {
-	this->smallItem = newItem;
-	dataCount = 1;
 }
 
 template<class ItemType>
-QuadNode<ItemType>::QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr, QuadNode<ItemType>* rightPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr)
+QuadNode<ItemType>::QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr, 
+	QuadNode<ItemType>* rightPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr):
+	smallItem(newItem), middleItem(NULL), largeItem(NULL),
+	leftChildPtr(leftPtr), leftMidChildPtr(lMidPtr), rightMidChildPtr(rMidPtr), rightChildPtr(rightPtr),
+	parentPtr(nullptr), dataCount(1)
 {
-	this->smallItem = newItem;
-	dataCount = 1;
 }
 
 template<class ItemType>
@@ -93,6 +96,12 @@ void QuadNode<ItemType>::setRightMidChildPtr(QuadNode<ItemType>* rightMid)
 }
 
 template<class ItemType>
+void QuadNode<ItemType>::setParentPtr(QuadNode<ItemType>* parent)
+{
+	parentPtr = parent;
+}
+
+template<class ItemType>
 QuadNode<ItemType>* QuadNode<ItemType>::getLeftChildPtr() const
 {
 	return leftChildPtr;
@@ -116,9 +125,23 @@ QuadNode<ItemType>* QuadNode<ItemType>::getRightMidChildPtr() const
 	return rightMidChildPtr;
 }
 template<class ItemType>
+QuadNode<ItemType>* QuadNode<ItemType>::getParentPtr() const
+{
+	return parentPtr;
+}
+template<class ItemType>
 bool QuadNode<ItemType>::isLeaf()
 {
-	return getLeftChildPtr() == nullptr && getLeftMidChildPtr() == nullptr && getRightMidChildPtr() == nullptr && getRightChildPtr() == nullptr;
+	return getLeftChildPtr() == nullptr && 
+		getLeftMidChildPtr() == nullptr && 
+		getRightMidChildPtr() == nullptr && 
+		getRightChildPtr() == nullptr;
+}
+
+template<class ItemType>
+bool QuadNode<ItemType>::isRoot()
+{
+	return parentPtr == nullptr;
 }
 
 template<class ItemType>

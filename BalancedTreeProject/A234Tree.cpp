@@ -8,101 +8,91 @@
 #pragma once
 
 template <class ItemType>
-A234Tree<ItemType>::A234Tree()
+A234Tree<ItemType>::A234Tree(): rootPtr(nullptr), rbt(nullptr),	current(nullptr)
 {
-}
-template<class ItemType>
-void A234Tree<ItemType>::insertInOrder(QuadNode<ItemType>* subTreeNode)
-{
-	bool isSuccessful = false;
-	if 
 }
 
-//template<class ItemType>
-//void A234Tree<ItemType>::findItem(QuadNode<ItemType>* subTreeNode, ItemType target)
-//{
-//	//if target is in the root node
-//	if (subTreeNode->getSmallItem() == target)
-//	{
-//		return subTreeNode->getSmallItem();
-//	}
-//	if (subTreeNode->getMidItem() == target)
-//	{
-//		return subTreeNode->getMidItem();
-//	}
-//	if (subTreeNode->getLargeItem() == target)
-//	{
-//		return subTreeNode->getLargeItem();
-//	}
-//
-//	//Else search the appropriate subTree
-//	//If node has 4 items
-//	if (subTreeNode->getDataCount() == 3)
-//	{
-//	
-//		if (target < subTreeNode->getSmallItem())
-//		{
-//			return findItem(subTreeNode->getLeftChildPtr(), target);
-//		}
-//
-//		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getMidItem())
-//		{
-//			return findItem(subTreeNode->getLeftMidChildPtr(), target);
-//		}
-//	
-//		if (target > subTreeNode->getMidItem() && target < subTreeNode->getLargeItem())
-//		{
-//			return findItem(subTreeNode->getRightMidChildPtr(), target);
-//		}
-//
-//		if (target > subTreeNode->getLargeItem())
-//		{
-//			return findItem(subTreeNode->getRightChildPtr(), target);
-//		}
-//	}
-//
-//	//Else if node has 3 items
-//	if (subTreeNode->getDataCount() == 2)
-//	{
-//		if (target < subTreeNode->getSmallItem())
-//		{
-//			return findItem(subTreeNode->getLeftChildPtr(), target);
-//		}
-//
-//		if (target > subTreeNode->getLargeItem())
-//		{
-//			return findItem(subTreeNode->getRightChildPtr(), target);
-//		}
-//		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getLargeItem())
-//		{
-//			return findItem(subTreeNode->getLeftMidChildPtr(), target);
-//		}
-//	}
-//
-//	//If the node has two children
-//	if (subTreeNode->getDataCount() == 1)
-//	{
-//		if (target < subTreeNode->getSmallVal())
-//		{
-//			return findItem(subTreeNode->getLeftPtr(), target);
-//		}
-//		else
-//		{
-//			return findItem(subTreeNode->getRightPtr(), target);
-//		}
-//	}
-//}
+template<class ItemType>
+void A234Tree<ItemType>::findItem(QuadNode<ItemType>* subTreeNode, ItemType target)
+{
+	//if target is in the root node
+	if (subTreeNode->getSmallItem() == target)
+		return subTreeNode->getSmallItem();
+
+	if (subTreeNode->getMidItem() == target)
+		return subTreeNode->getMidItem();
+
+	if (subTreeNode->getLargeItem() == target)
+		return subTreeNode->getLargeItem();
+
+	//Else search the appropriate subTree
+	//If node has 4 items
+	if (subTreeNode->getDataCount() == 3)
+	{
+		if (target < subTreeNode->getSmallItem())
+			return findItem(subTreeNode->getLeftChildPtr(), target);
+
+		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getMidItem())
+			return findItem(subTreeNode->getLeftMidChildPtr(), target)
+	
+		if (target > subTreeNode->getMidItem() && target < subTreeNode->getLargeItem())
+			return findItem(subTreeNode->getRightMidChildPtr(), target);
+
+		if (target > subTreeNode->getLargeItem())
+			return findItem(subTreeNode->getRightChildPtr(), target);
+	}
+
+	//Else if node has 3 items
+	if (subTreeNode->getDataCount() == 2)
+	{
+		if (target < subTreeNode->getSmallItem())
+			return findItem(subTreeNode->getLeftChildPtr(), target);
+
+		if (target > subTreeNode->getLargeItem())
+			return findItem(subTreeNode->getRightChildPtr(), target);
+
+		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getLargeItem())
+			return findItem(subTreeNode->getLeftMidChildPtr(), target);
+	}
+
+	//If the node has two children
+	if (subTreeNode->getDataCount() == 1)
+	{
+		if (target < subTreeNode->getSmallVal())
+			return findItem(subTreeNode->getLeftPtr(), target);
+
+		else
+			return findItem(subTreeNode->getRightPtr(), target);
+	}
+}
 
 template<class ItemType>
 void A234Tree<ItemType>::display()
 {
 }
 
-template<class ItemType>
+template<class ItemType> //Nick
 bool A234Tree<ItemType>::insertItem(ItemType newData)
 {
-	QuadNode<ItemType>* newNodePtr = new QuadNode<ItemType>(newData);
+	//To find leaf with less than 3 items
+	QuadNode<ItemType>* newNodePtr = locateLeaf(rootPtr, newData);
 
+	//leaf has 2 items, and can be inserted
+	if (newNodePtr->getDataCount() == 2)
+	{
+		if (newData < newNodePtr->getSmallItem())
+		{
+			newNodePtr->setMidItem(newNodePtr->getSmallItem());
+			newNodePtr->setSmallItem(newData);
+		}
+		else if (newData < newNodePtr.getLargeItem())
+			newNodePtr->setMidItem(newData);
+		else
+		{
+			newNodePtr->setMidItem(newNodePtr->getLargeItem());
+			newNodePtr->setLargeItem(newData);
+		}
+	}
 }
 
 template<class ItemType>
@@ -110,21 +100,27 @@ void A234Tree<ItemType>::remove()
 {
 }
 
-template<class ItemType>
+template<class ItemType> //Nick
 QuadNode<ItemType>* A234Tree<ItemType>::locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
-	return nullptr;
-}
+	//While traveling down the tree 4 things can happen.
+	//1. Node is empty
+	//2. Node has 1 item, always small node
+	//3. Node has 2 items, always small and largest node
+	//4. Node is full (3 items) small, mid, and large
+	//Shifts need to be made to keep the structure of tree.
 
-template<class ItemType>
-QuadNode<ItemType>* A234Tree<ItemType>::splitNode(QuadNode<ItemType>* subTreeNode)
-{
-	QuadNode<ItemType>* newNodePtr = new QuadNode<ItemType>(subTreeNode);
-	newNodePtr->setSmallItem(subTreeNode->getSmallItem());
-	newNodePtr->setMidItem(subTreeNode->getMidItem());
-	subTreeNode->setLargeItem(subTreeNode->getLargeItem());
+	//Node is the root, and all values need to be set for
+	if (subTreeNode->isRoot)
+	{
+		QuadNode<ItemType>* rootPtr = new QuadNode<ItemType>(subTreeNode);
+		QuadNode<ItemType>* newNodePtr = new QuadNode<ItemType>(subTreeNode);
+		newNodePtr->setSmallItem(subTreeNode->getSmallItem());
+		newNodePtr->setMidItem(subTreeNode->getMidItem());
+		subTreeNode->setLargeItem(subTreeNode->getLargeItem());
+	}
 	
-
+	return nullptr;
 }
 
 template<class ItemType> // Steve 
