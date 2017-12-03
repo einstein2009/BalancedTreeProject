@@ -207,7 +207,7 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 				//subTreeNode is large child
 				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
 				{
-
+					//change to commit
 				}
 
 				//else subTreeNode is middle child
