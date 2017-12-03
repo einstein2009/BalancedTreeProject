@@ -29,9 +29,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-//#include "TreeInterface.h"
+#include "TreeInterface.h"
 #include "A234Tree.h"
-//#include "RedBlackTree.h"
+#include "RedBlackTree.h"
 
 using namespace std;
 
@@ -46,8 +46,7 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength);
 
 int main()
 {
-	/*
-	TreeInterface<int> *CpTreePtr = new A234Tree<int>; //pointer to 2-3-4 tree
+	A234Tree<int> *CpTreePtr; //pointer to 2-3-4 tree
 	int iRandValue; // used to insert random values into tree
 	int arriFirstNumToRemove[37]; // stores 37 numbers to remove from 2-3-4 tree
 	int arriSecondNumToRemove[32]; // stores 32 numbers to remove from red-black tree
@@ -65,7 +64,7 @@ int main()
 		iRandValue = (rand() % 301) + 200;
 		
 		//adds iRandValue to the 2-3-4 tree
-		CpTreePtr->add(iRandValue);
+		CpTreePtr->insert(iRandValue);
 		
 		//stores the first 37 integers into array for use in remove function
 		if (iteration < 37)
@@ -203,7 +202,7 @@ int main()
 
 	cout << "Converting 2-3-4 tree to a Red-Black Tree..." << endl << endl;
 	//convert 2-3-4 tree to red-black by passing pointer to constructor of red-black tree
-	TreeInterface<int> *CpRedBlackTreePtr = new RedBlackTree<int>(CpTreePtr);
+	CpTreePtr->convertToRBT(CpTreePtr->getRoot());
 
 	//display list after conversion
 	cout << "Displaying Red-Black Tree values..." << endl;
@@ -239,7 +238,7 @@ int main()
 	cin.clear();
 	cin.ignore(100, '\n');
 	cin.get();
-	*/
+
 	return 0;
 }
 
@@ -269,3 +268,4 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength)
 	//item not found
 	return -1;
 }
+
