@@ -29,9 +29,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "TreeInterface.h"
+//#include "TreeInterface.h"
 #include "A234Tree.h"
-#include "RedBlackTree.h"
+//#include "RedBlackTree.h"
 
 using namespace std;
 
@@ -46,6 +46,7 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength);
 
 int main()
 {
+	/*
 	TreeInterface<int> *CpTreePtr = new A234Tree<int>; //pointer to 2-3-4 tree
 	int iRandValue; // used to insert random values into tree
 	int arriFirstNumToRemove[37]; // stores 37 numbers to remove from 2-3-4 tree
@@ -238,7 +239,7 @@ int main()
 	cin.clear();
 	cin.ignore(100, '\n');
 	cin.get();
-
+	*/
 	return 0;
 }
 
@@ -268,4 +269,3 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength)
 	//item not found
 	return -1;
 }
-

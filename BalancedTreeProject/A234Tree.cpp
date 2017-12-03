@@ -194,6 +194,13 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 				//subTreeNode is small child
 				if (subTreeNode->getLargeItem() < parentNode->getSmallItem())
 				{
+					parentNode->setMidItem(parentNode->getSmallItem());
+					parentNode->setSmallItem(subTreeNode->getMidItem());
+					parentNode->setLeftChildPtr(subTreeNode->getSmallItem());
+					parentNode->setDataCount(3);
+
+					QuadNode<ItemType>* leftMidChildNode = new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					parentNode->setLeftMidChildPtr(leftMidChildNode);
 
 				}
 
@@ -295,19 +302,19 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 		*current->setItem(root->getSmallItem());
 		*current->setColor(Color::BLACK);
 		*current->setLeftChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem()));
-		*current->setRightChildPtr(new RedBlackNode(root->getMidItem());
-		*current->getRightCroot->getLeftChildPtr()ChildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem());
-		*current->getRightChildPtr()->setRightchildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem());
+		*current->setRightChildPtr(new RedBlackNode(root->getMidItem()));
+		*current->getRightCroot->getLeftChildPtr()ChildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem()));
+		*current->getRightChildPtr()->setRightchildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem()));
 	}
 	else {
 		*current->setItem(root->getMidItem());
 		*current->setColor(Color::BLACK);
 		*current->setLeftChildPtr(new RedBlackNode(root->getSmallItem));
-		*current->getLeftChildPtr()->setLeftChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem());
-		*current->getLeftChildPtr()->setRightChildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem());
+		*current->getLeftChildPtr()->setLeftChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem()));
+		*current->getLeftChildPtr()->setRightChildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem()));
 		*current->setRightChildPtr(new RedBlackNode(root->getLargeItem));
-		*current->getRightChildPtr()->setLeftChildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem());
-		*current->getRightChildPtr()->setRightChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem());
+		*current->getRightChildPtr()->setLeftChildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem()));
+		*current->getRightChildPtr()->setRightChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem()));
 	}
 	convertToRBT(root->getLeftChildPtr());
 	convertToRBT(root->getLeftMidChildPtr());
