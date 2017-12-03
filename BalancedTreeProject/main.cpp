@@ -64,7 +64,7 @@ int main()
 		iRandValue = (rand() % 301) + 200;
 		
 		//adds iRandValue to the 2-3-4 tree
-		CpTreePtr->insert(iRandValue);
+		CpTreePtr->insertItem(iRandValue);
 		
 		//stores the first 37 integers into array for use in remove function
 		if (iteration < 37)
