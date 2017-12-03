@@ -72,15 +72,48 @@ void A234Tree<ItemType>::display()
 }
 
 template<class ItemType> //Nick
-bool A234Tree<ItemType>::insertItem(ItemType newData)
+void A234Tree<ItemType>::insertItem(ItemType newData)
 {
-	//While traveling down the tree to ADD an item, 4 things can happen.
-	//1. Node is empty
-	//2. Node has 1 item, always small node
-	//3. Node has 2 items, always small and largest node
-	//4. Node is full (3 items) small, mid, and large
-	//Shifts need to be made to keep the structure of tree.
+	//This ensures that the new leafNode is always a leaf
+	QuadNode<ItemType>* leafNode = locateLeaf(rootPtr, newData);
+	
+	//New tree
+	if (leafNode->getDataCount() == 0)
+		leafNode->setSmallItem(newData);
 
+	//Only one item in the leafNode
+	if (leafNode->getDataCount() == 1)
+	{
+		//The newData is smaller than the item
+		if (newData < leafNode->getSmallItem())
+		{
+			leafNode->setLargeItem(leafNode->getSmallItem());
+			leafNode->setSmallItem(newData);
+		}
+		//The newData is larger than the item
+		else if (newData > leafNode->getSmallItem())
+			leafNode->setLargeItem(newData);
+	}
+
+	//Two items in the leafNode
+	if (leafNode->getDataCount() == 2)
+	{
+		//The newData is smaller than the smallest item
+		if (newData < leafNode->getSmallItem())
+		{
+			leafNode->setLargeItem(leafNode->getSmallItem());
+			leafNode->setSmallItem(newData);
+		}
+		//The newData is larger than the largest item
+		else if (newData > leafNode->getLargeItem())
+		{
+			leafNode->setMidItem(leafNode->getLargeItem());
+			leafNode->setLargeItem(newData);
+		}
+		//The newData is in the middle
+		else
+			subTreeNode->setMidItem(newData);
+	}
 }
 
 template<class ItemType>
@@ -89,34 +122,59 @@ void A234Tree<ItemType>::remove()
 }
 
 template<class ItemType> //Nick
-QuadNode<ItemType>* A234Tree<ItemType>::locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
+QuadNode<ItemType>* A234Tree<ItemType>::
+locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
 	//-------------------------------------
-	//1. Node is a Leaf
+	//Node is a Leaf
 	//-------------------------------------
 
 	if (subTreeNode->isLeaf())
 		return subTreeNode;
 
 	//-------------------------------------
-	//2. Node has 1 item, always small item
+	//Node has 1 item, always small node, left and right children
 	//-------------------------------------
 
-	if (subTreeNode->dataCount == 1)
+	if (subTreeNode->getDataCount() == 1)
 	{
-		//If Node contains no children
-		if (subTreeNode->getLeftChildPtr() == nullptr && 
-			subTreeNode->getLeftMidChildPtr() == nullptr &&
-			subTreeNode->getRightMidChildPtr() == nullptr &&
-			subTreeNode->getRightChildPtr() == nullptr)
-			return subTreeNode;
-		else if (true)
-		{
+		//Smaller than small, send to the left
+		if (target < subTreeNode->getSmallItem())
+			return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+		//Larger than small, send to the right
+		if (target > subTreeNode->getSmallItem())
+			return locateLeaf(subTreeNode->getRightChildPtr(), target);
+	}
+	else if (subTreeNode->getDataCount() == 1 && subTreeNode->isLeaf())
+		return subTreeNode;
 
-		}
+	//-------------------------------------
+	//Node has 2 items, always small and largest items,
+	//left, leftMid, and right children
+	//-------------------------------------
+
+	if (subTreeNode->getDataCount() == 2)
+	{
+		//Smaller than small, send to the left
+		if (target < subTreeNode->getSmallItem())
+			return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+		//Larger than the small, but smaller than large
+		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getLargeItem())
+			return locateLeaf(subTreeNode->getLeftMidChildPtr(), target);
+		//Larger than large, send to the right
+		if (target > subTreeNode->getLargeItem())
+			return locateLeaf(subTreeNode->getRightChildPtr(), target)
 	}
 
-	return nullptr;
+	//-------------------------------------
+	//Node is full small, mid, and large items, 
+	//left, leftMid, rightMid, and right children
+	//-------------------------------------
+
+	if (subTreeNode->getDataCount() == 3)
+	{
+
+	}
 }
 
 template<class ItemType> // Steve 

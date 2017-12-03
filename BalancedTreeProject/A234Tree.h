@@ -19,7 +19,7 @@ public:
 	//void inOrder(QuadNode<ItemType>* subTreeNode);
 	void findItem(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void display();
-	bool insertItem(ItemType newData);
+	void insertItem(ItemType newData);
 	void remove();
 	QuadNode<ItemType>* locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void convertToRBT(QuadNode<ItemType>* root);
