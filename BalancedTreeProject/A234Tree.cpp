@@ -158,12 +158,17 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 
 			//Fill out rightChildNode, and update parents
 			rightChildNode->setDataCount(1);
+
 			rightChildNode->setRightChildPtr(subTreeNode->getRightChildPtr());
+
 			if (subTreeNode->getRightChildPtr() != nullptr)
-				subTreeNode->getRightChildPtr()->setParentPtr(rightChildNode);
+				(subTreeNode->getRightChildPtr())->setParentPtr(rightChildNode);
+
 			rightChildNode->setLeftChildPtr(subTreeNode->getRightMidChildPtr());
+
 			if (subTreeNode->getRightMidChildPtr() != nullptr)
-				subTreeNode->getRightMidChildPtr()->setParentPtr(rightChildNode);
+				(subTreeNode->getRightMidChildPtr())->setParentPtr(rightChildNode);
+
 			rightChildNode->setParentPtr(newRoot);
 
 			//Must update subTreeNode
@@ -196,18 +201,22 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 				{
 					parentNode->setMidItem(parentNode->getSmallItem());
 					parentNode->setSmallItem(subTreeNode->getMidItem());
-					parentNode->setLeftChildPtr(subTreeNode->getSmallItem());
+					parentNode->setRightMidChildPtr(parentNode->getLeftMidChildPtr());
 					parentNode->setDataCount(3);
 
-					QuadNode<ItemType>* leftMidChildNode = new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					QuadNode<ItemType>* leftMidChildNode = 
+						new QuadNode<ItemType>(subTreeNode->getLargeItem());
 					parentNode->setLeftMidChildPtr(leftMidChildNode);
+
+					leftMidChildNode->setParentPtr(parentNode);
+					leftMidChildNode->setDataCount(1);
 
 				}
 
 				//subTreeNode is large child
 				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
 				{
-					//change to commit
+					
 				}
 
 				//else subTreeNode is middle child
