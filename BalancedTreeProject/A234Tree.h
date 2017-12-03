@@ -23,7 +23,10 @@ public:
 	void remove();
 	QuadNode<ItemType>* locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void convertToRBT(QuadNode<ItemType>* root);
-	
+	int getRootDataCount() const;
+	ItemType getRootSmallItem() comst;
+	ItemType getRootMidItem() const;
+	ItemType getRootLargeItem() const;
 };
 #include "A234Tree.cpp"
 #endif _A234TREE
