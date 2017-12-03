@@ -16,6 +16,7 @@ private:
 
 public:
 	A234Tree();
+	//void inOrder(QuadNode<ItemType>* subTreeNode);
 	void findItem(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void display();
 	bool insertItem(ItemType newData);

@@ -22,7 +22,17 @@ parentPtr(nullptr), dataCount(1)
 
 template<class ItemType>
 QuadNode<ItemType>::QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr, 
-	QuadNode<ItemType>* rightPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr):
+	QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr, QuadNode<ItemType>* rightPtr):
+	smallItem(newItem), middleItem(NULL), largeItem(NULL),
+	leftChildPtr(leftPtr), leftMidChildPtr(lMidPtr), rightMidChildPtr(rMidPtr), rightChildPtr(rightPtr),
+	parentPtr(nullptr), dataCount(1)
+{
+}
+
+template<class ItemType>
+QuadNode<ItemType>::QuadNode(const ItemType newItem, Item
+	QuadNode<ItemType>* leftPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr,
+	QuadNode<ItemType>* rightPtr) :
 	smallItem(newItem), middleItem(NULL), largeItem(NULL),
 	leftChildPtr(leftPtr), leftMidChildPtr(lMidPtr), rightMidChildPtr(rMidPtr), rightChildPtr(rightPtr),
 	parentPtr(nullptr), dataCount(1)

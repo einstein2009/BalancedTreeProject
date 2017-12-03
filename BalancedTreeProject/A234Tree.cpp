@@ -74,25 +74,13 @@ void A234Tree<ItemType>::display()
 template<class ItemType> //Nick
 bool A234Tree<ItemType>::insertItem(ItemType newData)
 {
-	//To find leaf with less than 3 items
-	QuadNode<ItemType>* newNodePtr = locateLeaf(rootPtr, newData);
+	//While traveling down the tree to ADD an item, 4 things can happen.
+	//1. Node is empty
+	//2. Node has 1 item, always small node
+	//3. Node has 2 items, always small and largest node
+	//4. Node is full (3 items) small, mid, and large
+	//Shifts need to be made to keep the structure of tree.
 
-	//leaf has 2 items, and can be inserted
-	if (newNodePtr->getDataCount() == 2)
-	{
-		if (newData < newNodePtr->getSmallItem())
-		{
-			newNodePtr->setMidItem(newNodePtr->getSmallItem());
-			newNodePtr->setSmallItem(newData);
-		}
-		else if (newData < newNodePtr.getLargeItem())
-			newNodePtr->setMidItem(newData);
-		else
-		{
-			newNodePtr->setMidItem(newNodePtr->getLargeItem());
-			newNodePtr->setLargeItem(newData);
-		}
-	}
 }
 
 template<class ItemType>
@@ -103,23 +91,31 @@ void A234Tree<ItemType>::remove()
 template<class ItemType> //Nick
 QuadNode<ItemType>* A234Tree<ItemType>::locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
-	//While traveling down the tree 4 things can happen.
-	//1. Node is empty
-	//2. Node has 1 item, always small node
-	//3. Node has 2 items, always small and largest node
-	//4. Node is full (3 items) small, mid, and large
-	//Shifts need to be made to keep the structure of tree.
+	//-------------------------------------
+	//1. Node is a Leaf
+	//-------------------------------------
 
-	//Node is the root, and all values need to be set for
-	if (subTreeNode->isRoot)
+	if (subTreeNode->isLeaf())
+		return subTreeNode;
+
+	//-------------------------------------
+	//2. Node has 1 item, always small item
+	//-------------------------------------
+
+	if (subTreeNode->dataCount == 1)
 	{
-		QuadNode<ItemType>* rootPtr = new QuadNode<ItemType>(subTreeNode);
-		QuadNode<ItemType>* newNodePtr = new QuadNode<ItemType>(subTreeNode);
-		newNodePtr->setSmallItem(subTreeNode->getSmallItem());
-		newNodePtr->setMidItem(subTreeNode->getMidItem());
-		subTreeNode->setLargeItem(subTreeNode->getLargeItem());
+		//If Node contains no children
+		if (subTreeNode->getLeftChildPtr() == nullptr && 
+			subTreeNode->getLeftMidChildPtr() == nullptr &&
+			subTreeNode->getRightMidChildPtr() == nullptr &&
+			subTreeNode->getRightChildPtr() == nullptr)
+			return subTreeNode;
+		else if (true)
+		{
+
+		}
 	}
-	
+
 	return nullptr;
 }
 
@@ -151,7 +147,7 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 		*current->setColor(Color::BLACK);
 		*current->setLeftChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem()));
 		*current->setRightChildPtr(new RedBlackNode(root->getMidItem());
-		*current->getRightCroot->getLeftChildPtr()hildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem());
+		*current->getRightCroot->getLeftChildPtr()ChildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem());
 		*current->getRightChildPtr()->setRightchildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem());
 	}
 	else {

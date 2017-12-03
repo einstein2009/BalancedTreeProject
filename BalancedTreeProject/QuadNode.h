@@ -29,7 +29,9 @@ private:
 public:
 	QuadNode();
 	QuadNode(const ItemType newItem);
-	QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr, QuadNode<ItemType>* rightPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr);
+	QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr,
+		QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr,
+		QuadNode<ItemType>* rightPtr);
 
 	ItemType getSmallItem() const;
 	ItemType getMidItem() const;
