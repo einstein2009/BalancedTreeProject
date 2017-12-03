@@ -8,8 +8,9 @@
 #pragma once
 
 template <class ItemType>
-A234Tree<ItemType>::A234Tree(): rootPtr(nullptr), rbt(nullptr),	current(nullptr)
+A234Tree<ItemType>::A234Tree(): rbt(nullptr), current(nullptr)
 {
+	rootPtr = new QuadNode<ItemType>();
 }
 
 template<class ItemType>
@@ -79,7 +80,10 @@ void A234Tree<ItemType>::insertItem(ItemType newData)
 	
 	//New tree
 	if (leafNode->getDataCount() == 0)
+	{
 		leafNode->setSmallItem(newData);
+		leafNode->setDataCount(1);
+	}
 
 	//Only one item in the leafNode
 	if (leafNode->getDataCount() == 1)
@@ -93,6 +97,8 @@ void A234Tree<ItemType>::insertItem(ItemType newData)
 		//The newData is larger than the item
 		else if (newData > leafNode->getSmallItem())
 			leafNode->setLargeItem(newData);
+
+		leafNode->setDataCount(2);
 	}
 
 	//Two items in the leafNode
@@ -113,6 +119,8 @@ void A234Tree<ItemType>::insertItem(ItemType newData)
 		//The newData is in the middle
 		else
 			subTreeNode->setMidItem(newData);
+
+		leafNode->setDataCount(3);
 	}
 }
 
@@ -144,10 +152,12 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 			QuadNode<ItemType>* rightChildNode = new QuadNode<ItemType>(subTreeNode->getLargeItem());
 			
 			//New "Binary" root
+			newRoot->setDataCount(1);
 			newRoot->setLeftChildPtr(subTreeNode);
 			newRoot->setRightChildPtr(rightChildNode);
 
 			//Fill out rightChildNode, and update parents
+			rightChildNode->setDataCount(1);
 			rightChildNode->setRightChildPtr(subTreeNode->getRightChildPtr());
 			if (subTreeNode->getRightChildPtr() != nullptr)
 				subTreeNode->getRightChildPtr()->setParentPtr(rightChildNode);
@@ -157,6 +167,7 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 			rightChildNode->setParentPtr(newRoot);
 
 			//Must update subTreeNode
+			subTreeNode->setDataCount(1);
 			subTreeNode->setRightChildPtr(subTreeNode->getLeftMidChildPtr());
 			subTreeNode->setParentPtr(newRoot);
 			subTreeNode->setLeftMidChildPtr(nullptr);
@@ -172,10 +183,48 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 			else
 				return locateLeaf(rightChildNode, target);
 		}
-		//Tree isn't a root, need a parent node to track the chain
+		//subTreeNode isn't a root, need a parent node to track the chain
 		else
 		{
 			QuadNode<ItemType>* parentNode = subTreeNode->getParentPtr();
+
+			//If parent has 2 items, then subTreeNode is 1 of 3 children
+			if (parentNode->getDataCount() == 2)
+			{
+				//subTreeNode is small child
+				if (subTreeNode->getLargeItem() < parentNode->getSmallItem())
+				{
+
+				}
+
+				//subTreeNode is large child
+				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
+				{
+
+				}
+
+				//else subTreeNode is middle child
+				else
+				{
+
+				}
+			}
+
+			//If parent has 1 item, then subTreeNode is 1 of 2 children
+			if (parentNode->getDataCount() == 1)
+			{
+				//subTreeNode is small child
+				if (subTreeNode->getLargeItem() < parentNode->getSmallItem())
+				{
+
+				}
+
+				//subTreeNode is large child
+				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
+				{
+
+				}
+			}
 		}
 	}
 

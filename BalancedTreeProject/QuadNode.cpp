@@ -9,7 +9,7 @@
 template<class ItemType>
 QuadNode<ItemType>::QuadNode(): smallItem(NULL), middleItem(NULL), largeItem(NULL),
 leftChildPtr(nullptr), leftMidChildPtr(nullptr), rightMidChildPtr(nullptr), rightChildPtr(nullptr),
-parentPtr(nullptr), dataCount(1)
+parentPtr(nullptr), dataCount(0)
 {
 }
 
@@ -23,16 +23,6 @@ parentPtr(nullptr), dataCount(1)
 template<class ItemType>
 QuadNode<ItemType>::QuadNode(const ItemType newItem, QuadNode<ItemType>* leftPtr, 
 	QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr, QuadNode<ItemType>* rightPtr):
-	smallItem(newItem), middleItem(NULL), largeItem(NULL),
-	leftChildPtr(leftPtr), leftMidChildPtr(lMidPtr), rightMidChildPtr(rMidPtr), rightChildPtr(rightPtr),
-	parentPtr(nullptr), dataCount(1)
-{
-}
-
-template<class ItemType>
-QuadNode<ItemType>::QuadNode(const ItemType newItem, Item
-	QuadNode<ItemType>* leftPtr, QuadNode<ItemType>* lMidPtr, QuadNode<ItemType>* rMidPtr,
-	QuadNode<ItemType>* rightPtr) :
 	smallItem(newItem), middleItem(NULL), largeItem(NULL),
 	leftChildPtr(leftPtr), leftMidChildPtr(lMidPtr), rightMidChildPtr(rMidPtr), rightChildPtr(rightPtr),
 	parentPtr(nullptr), dataCount(1)
@@ -60,24 +50,18 @@ ItemType QuadNode<ItemType>::getLargeItem() const
 template<class ItemType>
 void QuadNode<ItemType>::setSmallItem(ItemType newItem)
 {
-	if (smallItem == newItem())
-		dataCount++;
 	smallItem = newItem;
 }
 
 template<class ItemType>
 void QuadNode<ItemType>::setMidItem(ItemType newItem)
 {
-	if (middleItem == newItem())
-		dataCount++;
 	middleItem = newItem;
 }
 
 template<class ItemType>
 void QuadNode<ItemType>::setLargeItem(ItemType newItem)
 {
-	if (largeItem == newItem())
-		dataCount++;
 	largeItem = newItem;
 }
 
@@ -158,4 +142,10 @@ template<class ItemType>
 int QuadNode<ItemType>::getDataCount()
 {
 	return dataCount;
+}
+
+template<class ItemType>
+void QuadNode<ItemType>::setDataCount(int count)
+{
+	dataCount = count;
 }

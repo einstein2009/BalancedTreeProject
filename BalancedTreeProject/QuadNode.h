@@ -56,6 +56,7 @@ public:
 	bool isLeaf();
 	bool isRoot();
 	int getDataCount();
+	void setDataCount(int count);
 
 }; // end QuadNode
 #endif _QUAD_NODE
