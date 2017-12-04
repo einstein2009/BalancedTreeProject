@@ -168,7 +168,7 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 			QuadNode<ItemType>* newRoot = new QuadNode<ItemType>(subTreeNode->getMidItem());
 			//And a new right child node, as the root will be the left node
 			QuadNode<ItemType>* rightChildNode = new QuadNode<ItemType>(subTreeNode->getLargeItem());
-			
+
 			//New "Binary" root
 			newRoot->setDataCount(1);
 			newRoot->setLeftChildPtr(subTreeNode);
@@ -197,7 +197,7 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 			subTreeNode->setRightMidChildPtr(nullptr);
 			subTreeNode->setMidItem(NULL);
 			subTreeNode->setLargeItem(NULL);
-			
+
 			this->rootPtr = newRoot;
 
 			//Show must go on after split.
@@ -222,7 +222,7 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 					parentNode->setRightMidChildPtr(parentNode->getLeftMidChildPtr());
 					parentNode->setDataCount(3);
 
-					QuadNode<ItemType>* leftMidChildNode = 
+					QuadNode<ItemType>* leftMidChildNode =
 						new QuadNode<ItemType>(subTreeNode->getLargeItem());
 					parentNode->setLeftMidChildPtr(leftMidChildNode);
 
@@ -235,18 +235,85 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 					subTreeNode->setRightMidPtr(nullptr);
 					subTreeNode->setMidVal(NULL);
 					subTreeNode->setLargeVal(NULL);
+
+					if (target < parentNode->getSmallItem())
+						return locateLeaf(parentNode->getLeftChildPtr(), target);
+
+					else if (target < parentNode->getMidItem())
+						return locateLeaf(leftMidChildNode, target);
+
+					else if (target < parentNode->getLargeItem())
+						return locateLeaf(parentNode->getRightMidChildPtr(), target);
+
+					else
+						return locateLeaf(parentNode->getRightChildPtr(), target);
 				}
 
 				//subTreeNode is large child
 				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
 				{
-					
+					parentNode->setMidItem(parentNode->getLargeItem());
+					parentNode->setLargeItem(subTreeNode->getMidItem());
+					parentNode->setDataCount(3);
+
+					QuadNode<ItemType>* rightMidChildNode =
+						new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					parentNode->setRightMidChildPtr(rightMidChildNode);
+
+					rightMidChildNode->setParentPtr(parentNode);
+					rightMidChildNode->setDataCount(1);
+
+					//Must update subTreePtr
+					subTreeNode->setDataCount(1);
+					subTreeNode->setLeftMidPtr(nullptr);
+					subTreeNode->setRightMidPtr(nullptr);
+					subTreeNode->setMidVal(NULL);
+					subTreeNode->setLargeVal(NULL);
+
+					if (target < parentNode->getSmallItem())
+						return locateLeaf(parentNode->getLeftChildPtr(), target);
+
+					else if (target < parentNode->getMidItem())
+						return locateLeaf(leftMidChildNode, target);
+
+					else if (target < parentNode->getLargeItem())
+						return locateLeaf(parentNode->getRightMidChildPtr(), target);
+
+					else
+						return locateLeaf(parentNode->getRightChildPtr(), target);
 				}
 
 				//else subTreeNode is middle child
 				else
 				{
+					parentNode->setMidItem(subTreeNode->getMidItem());
+					parentNode->setDataCount(3);
 
+					QuadNode<ItemType>* rightMidChildNode =
+						new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					parentNode->setRightMidChildPtr(rightMidChildNode);
+
+					rightMidChildNode->setParentPtr(parentNode);
+					rightMidChildNode->setDataCount(1);
+
+					//Must update subTreePtr
+					subTreeNode->setDataCount(1);
+					subTreeNode->setLeftMidPtr(nullptr);
+					subTreeNode->setRightMidPtr(nullptr);
+					subTreeNode->setMidVal(NULL);
+					subTreeNode->setLargeVal(NULL);
+
+					if (target < parentNode->getSmallItem())
+						return locateLeaf(parentNode->getLeftChildPtr(), target);
+
+					else if (target < parentNode->getMidItem())
+						return locateLeaf(leftMidChildNode, target);
+
+					else if (target < parentNode->getLargeItem())
+						return locateLeaf(parentNode->getRightMidChildPtr(), target);
+
+					else
+						return locateLeaf(parentNode->getRightChildPtr(), target);
 				}
 			}
 
@@ -256,55 +323,105 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 				//subTreeNode is small child
 				if (subTreeNode->getLargeItem() < parentNode->getSmallItem())
 				{
+					parentNode->setLargeItem(parentNode->getSmallItem());
+					parentNode->setSmallItem(subTreeNode->getMidItem());
+					parentNode->setDataCount(2);
 
+					QuadNode<ItemType>* leftMidChildNode =
+						new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					parentNode->setLeftMidChildPtr(leftMidChildNode);
+
+					leftMidChildNode->setParentPtr(parentNode);
+					leftMidChildNode->setDataCount(1);
+
+					//Must update subTreePtr
+					subTreeNode->setDataCount(1);
+					subTreeNode->setLeftMidPtr(nullptr);
+					subTreeNode->setRightMidPtr(nullptr);
+					subTreeNode->setMidVal(NULL);
+					subTreeNode->setLargeVal(NULL);
+
+					if (target < parentNode->getSmallItem())
+						return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+
+					else if (target > parentNode->getLargeItem())
+						return locateLeaf(parentNode->getRightChildPtr(), target);
+
+					else
+						return locateLeaf(parentNode->getLeftMidChildPtr(), target);
 				}
 
 				//subTreeNode is large child
 				if (subTreeNode->getSmallItem() > parentNode->getLargeItem())
 				{
+					parentNode->setLargeItem(subTreeNode->getMidItem());
+					parentNode->setLeftMidChildPtr(subTreeNode);
+					parentNode->setDataCount(2);
 
+					QuadNode<ItemType>* rightChildNode =
+						new QuadNode<ItemType>(subTreeNode->getLargeItem());
+					parentNode->setRightChildPtr(rightChildNode);
+
+					rightChildNode->setParentPtr(parentNode);
+					rightChildNode->setDataCount(1);
+
+					//Must update subTreePtr
+					subTreeNode->setDataCount(1);
+					subTreeNode->setLeftMidPtr(nullptr);
+					subTreeNode->setRightMidPtr(nullptr);
+					subTreeNode->setMidVal(NULL);
+					subTreeNode->setLargeVal(NULL);
+
+					if (target < parentNode->getSmallItem())
+						return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+
+					else if (target > parentNode->getLargeItem())
+						return locateLeaf(parentNode->getRightChildPtr(), target);
+
+					else
+						return locateLeaf(parentNode->getLeftMidChildPtr(), target);
 				}
 			}
 		}
-	}
 
-	//-------------------------------------
-	//Node is a Leaf
-	//-------------------------------------
+		//-------------------------------------
+		//Node is a Leaf
+		//-------------------------------------
 
-	if (subTreeNode->isLeaf())
-		return subTreeNode;
+		if (subTreeNode->isLeaf())
+			return subTreeNode;
 
-	//-------------------------------------
-	//Node has 1 item, always small node, left and right children
-	//-------------------------------------
+		//-------------------------------------
+		//Node has 1 item, always small node, left and right children
+		//-------------------------------------
 
-	if (subTreeNode->getDataCount() == 1)
-	{
-		//Smaller than small, send to the left
-		if (target < subTreeNode->getSmallItem())
-			return locateLeaf(subTreeNode->getLeftChildPtr(), target);
-		//Larger than small, send to the right
-		if (target > subTreeNode->getSmallItem())
-			return locateLeaf(subTreeNode->getRightChildPtr(), target);
-	}
+		if (subTreeNode->getDataCount() == 1)
+		{
+			//Smaller than small, send to the left
+			if (target < subTreeNode->getSmallItem())
+				return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+			//Larger than small, send to the right
+			if (target > subTreeNode->getSmallItem())
+				return locateLeaf(subTreeNode->getRightChildPtr(), target);
+		}
 
-	//-------------------------------------
-	//Node has 2 items, always small and largest items,
-	//left, leftMid, and right children
-	//-------------------------------------
+		//-------------------------------------
+		//Node has 2 items, always small and largest items,
+		//left, leftMid, and right children
+		//-------------------------------------
 
-	if (subTreeNode->getDataCount() == 2)
-	{
-		//Smaller than small, send to the left
-		if (target < subTreeNode->getSmallItem())
-			return locateLeaf(subTreeNode->getLeftChildPtr(), target);
-		//Larger than the small, but smaller than large
-		if (target > subTreeNode->getSmallItem() && target < subTreeNode->getLargeItem())
-			return locateLeaf(subTreeNode->getLeftMidChildPtr(), target);
-		//Larger than large, send to the right
-		if (target > subTreeNode->getLargeItem())
-			return locateLeaf(subTreeNode->getRightChildPtr(), target)
+		if (subTreeNode->getDataCount() == 2)
+		{
+			//Smaller than small, send to the left
+			if (target < subTreeNode->getSmallItem())
+				return locateLeaf(subTreeNode->getLeftChildPtr(), target);
+			//Larger than the small, but smaller than large
+			if (target > subTreeNode->getSmallItem() && target < subTreeNode->getLargeItem())
+				return locateLeaf(subTreeNode->getLeftMidChildPtr(), target);
+			//Larger than large, send to the right
+			if (target > subTreeNode->getLargeItem())
+				return locateLeaf(subTreeNode->getRightChildPtr(), target)
+		}
 	}
 }
 
