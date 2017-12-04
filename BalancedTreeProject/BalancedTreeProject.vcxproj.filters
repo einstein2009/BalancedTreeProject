@@ -33,6 +33,9 @@
     <ClInclude Include="BinaryNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RedBlackTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="QuadNode.cpp">
       <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RedBlackTree.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

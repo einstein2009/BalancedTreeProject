@@ -14,6 +14,19 @@ A234Tree<ItemType>::A234Tree(): rbt(nullptr), current(nullptr)
 }
 
 template<class ItemType>
+void A234Tree<ItemType>::inOrderTraversal(QuadNode<ItemType>* subTreeNode, int width)
+{
+		if (subTreeNode == nullptr)
+			return;
+		InorderTraversal(subTreeNode->getLeftChildPtr(), width + 1);
+		for (int i = 0; i < width; i++)
+			cout << ".";
+		cout << subTreeNode->getItem() << endl;
+
+		inOrderTraversal(subTreeNode->getRightChildPtr(), width + 1);
+}
+
+template<class ItemType>
 void A234Tree<ItemType>::findItem(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
 	//if target is in the root node
@@ -70,6 +83,11 @@ void A234Tree<ItemType>::findItem(QuadNode<ItemType>* subTreeNode, ItemType targ
 template<class ItemType>
 void A234Tree<ItemType>::display()
 {
+	cout << endl;
+
+	InorderTraversal(root, 0);
+
+	cout << endl;
 }
 
 template<class ItemType> //Nick
@@ -211,6 +229,12 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 					leftMidChildNode->setParentPtr(parentNode);
 					leftMidChildNode->setDataCount(1);
 
+					//Must update subTreePtr
+					subTreeNode->setDataCount(1);
+					subTreeNode->setLeftMidPtr(nullptr);
+					subTreeNode->setRightMidPtr(nullptr);
+					subTreeNode->setMidVal(NULL);
+					subTreeNode->setLargeVal(NULL);
 				}
 
 				//subTreeNode is large child

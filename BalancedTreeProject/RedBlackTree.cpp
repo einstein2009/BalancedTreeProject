@@ -1,3 +1,8 @@
+
+#include "stdafx.h"
+#include "RedBlackTree.h"
+#pragma once
+
 template<class ItemType>
 void RedBlackTree<ItemType>:: Delete(ItemType item)
 {
@@ -98,7 +103,7 @@ void RedBlackTree<ItemType>:: Delete(ItemType item)
 }
 
 template<class ItemType>
-void RedBlackTree<ItemType>:: fixAfterDelete(ItemType item)
+void RedBlackTree<ItemType>::fixAfterDelete(ItemType item)
 {
 	RedBlackNode* newNode;
 	while (p != root && p->getColor() == BLACK)
@@ -131,10 +136,11 @@ void RedBlackTree<ItemType>:: fixAfterDelete(ItemType item)
 				newNode->setRightColor(BLACK);
 				rotateLeft(root, p->getParent());
 				p = root;
-			}	
+			}
 		}
 
 		p->setColor(BLACK);
 		root->setColor(BLACK);
-}
+	}
 
+}
