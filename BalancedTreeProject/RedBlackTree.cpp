@@ -4,6 +4,50 @@
 #pragma once
 
 template<class ItemType>
+void RedBlackTree<ItemType>::Display(RedBlackNode* root)
+	if (root == Null)
+	{
+		cout << "Tree is empty" << endl;
+	}
+
+	if (isLeaf(root))
+	{
+		if (root->getColor() == BLACK)
+		{
+			cout << "(BLACK) " << root->getItem() << endl;
+		}
+		else{
+			cout << "(RED) " << root->getItem() << endl;
+		}
+
+		cout << "." << endl;
+	}
+	else
+	{
+		RedBlackNode* p = root;
+
+		while (!isLeaf(root))
+		{
+			p = root;
+			if (p->getColor() == BLACK)
+			{
+			cout << "(BLACK) " << p->getItem() << endl;
+			}
+			else
+			{
+			cout << "(RED) " << p->getItem() << endl;
+			}
+
+		cout << "." << endl;
+
+		}//end while
+		
+		display(p->getLeftChildPtr);
+		display(p->getRightChildPtr);
+
+	}
+
+template<class ItemType>
 void RedBlackTree<ItemType>:: Delete(ItemType item)
 {
   if (root == Null)
