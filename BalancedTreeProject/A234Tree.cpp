@@ -142,9 +142,45 @@ void A234Tree<ItemType>::insertItem(ItemType newData)
 	}
 }
 
+//Removes data item from 2-3-4 tree. Returns true if successful or false if no
+//such item exists. - Christy Broderick
 template<class ItemType>
 void A234Tree<ItemType>::remove()
 {
+	//locating dataItem
+	if (dataItem->isLeaf())
+	{
+		if (dataItem->isLeaf.next);
+		while (dataItem->leafNode())
+
+			//removing at a leaf
+			dataItem->removeLeafNode(int index) noexcept;
+		if (leafNode->getDataCount() == 0)
+			fixTree(leafNode)
+			return true
+	}
+	else
+		return false
+
+		//completes removal when the node is empty by deleting the root, redistributing
+		//values, or merging nodes.
+		fixTree(n: A234TreeNode)
+
+		if (n->isRoot())
+		{
+			root remove();
+
+		else
+		{
+			if (leafNode->getDataCount() == 2)
+			{
+				return findItem(subTreeNode->getLeftChildPtr(), target);
+				return findItem(subTreeNode->getLeftMidChildPtr(), target);
+				return findItem(subTreeNode->getRightChildPtr(), target);
+				return findItem(subTreeNode->getRightChildPtr(), target);
+			}
+		}
+		}
 }
 
 template<class ItemType> //Nick
@@ -445,7 +481,7 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 			*current->setRightChildPtr(new RedBlackNode(root->getRightChildPtr()->getMidItem()));
 		}
 		else {
-			current->setRightChildPtr(new RedBlackNode(root->getRightChildPtr()->getSmallItem()));
+			*current->setRightChildPtr(new RedBlackNode(root->getRightChildPtr()->getSmallItem()));
 		}
 	}
 	else if (root->getDataCount() == 2) {
@@ -453,7 +489,7 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 		*current->setColor(Color::BLACK);
 		*current->setLeftChildPtr(new RedBlackNode(root->getLeftChildPtr()->getSmallItem()));
 		*current->setRightChildPtr(new RedBlackNode(root->getMidItem()));
-		*current->getRightCroot->getLeftChildPtr()ChildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem()));
+		*current->getRightChildPtr->getLeftChildPtr()ChildPtr()->setLeftchildPtr(new RedBlackNode(root->getLeftMidChildPtr()->getSmallItem()));
 		*current->getRightChildPtr()->setRightchildPtr(new RedBlackNode(root->getRightMidChildPtr()->getSmallItem()));
 	}
 	else {
@@ -500,4 +536,14 @@ template<class ItemType>
 ItemType A234Tree<ItemType>::getRootLargeItem() const
 {
 	return rootPtr->getLargeItem();
+}
+
+//moving RBT pointer - Christy Broderick
+template<typename Key> typename Value inline converToRBT<Key, Value> & convertToRBT<Key, Value>::
+operator = (convertToRBT && 1hs) noexcept
+{
+tree_size = 1hs.tree_size;
+1hs.tree_size = 0;
+root = std::move(1hs.root);
+root->parent = nullptr;
 }
