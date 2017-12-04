@@ -90,7 +90,8 @@ void A234Tree<ItemType>::display()
 	cout << endl;
 }
 
-template<class ItemType> //Nick
+//Nick Ackors
+template<class ItemType>
 void A234Tree<ItemType>::insertItem(ItemType newData)
 {
 	//This ensures that the new leafNode is always a leaf
@@ -143,7 +144,8 @@ void A234Tree<ItemType>::insertItem(ItemType newData)
 }
 
 //Removes data item from 2-3-4 tree. Returns true if successful or false if no
-//such item exists. - Christy Broderick
+//such item exists.
+//Christy Broderick
 template<class ItemType>
 void A234Tree<ItemType>::remove()
 {
@@ -183,7 +185,8 @@ void A234Tree<ItemType>::remove()
 		}
 }
 
-template<class ItemType> //Nick
+//Nick Ackors
+template<class ItemType> 
 QuadNode<ItemType>* A234Tree<ItemType>::
 locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
@@ -461,7 +464,8 @@ locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 	}
 }
 
-template<class ItemType> // Steve 
+// Steve Hall
+template<class ItemType> 
 void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 {
 	// where should i move the Red Black Tree pointer ???

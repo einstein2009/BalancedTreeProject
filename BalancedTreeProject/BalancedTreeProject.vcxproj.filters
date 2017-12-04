@@ -47,8 +47,5 @@
     <ClCompile Include="QuadNode.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="RedBlackTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
