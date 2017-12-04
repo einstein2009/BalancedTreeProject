@@ -508,30 +508,35 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 	convertToRBT(root->getRightChildPtr());
 }
 
+//Rodel Aragon
 template<class ItemType>
 void A234Tree<ItemType>::convertToRBTStart()
 {
 	convertToRBT(rootPtr);
 }
 
+//Rodel Aragon
 template<class ItemType>
 int A234Tree<ItemType>::getRootDataCount() const
 {
 	return rootPtr->getDataCount();
 }
 
+//Rodel Aragon
 template<class ItemType>
 ItemType A234Tree<ItemType>::getRootSmallItem() const
 {
 	return rootPtr->getSmallItem();
 }
 
+//Rodel Aragon
 template<class ItemType>
 ItemType A234Tree<ItemType>::getRootMidItem() const
 {
 	return rootPtr->getMidItem();
 }
 
+//Rodel Aragon
 template<class ItemType>
 ItemType A234Tree<ItemType>::getRootLargeItem() const
 {
