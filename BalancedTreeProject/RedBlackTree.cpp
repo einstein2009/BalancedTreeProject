@@ -4,9 +4,8 @@
 *                 Christsandra Broderick, Chandler Snoddy  *
 *                 Nicholas Ackors, Stephen Hall            *
 ***********************************************************/
-#include "stdafx.h"
 #pragma once
-
+#include <utility>
 
 //The following might need to be added to the main code since it deals with rotating the nodes left and right.
 template <class ItemType>
@@ -70,7 +69,7 @@ void RedBlackTree::fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType
 	//grandParent_point is the grandparent of the child.
 	//sibling_point is the sibling of the parent of the child.
 
-	while ((point != root) && (point->color != BLACK) && (point->parent->color == RED))
+	while ((point != root)  (point->color != BLACK)  (point->parent->color == RED))
 	{
 		parent_point = point->parent;
 		grandParent_point = point->parent->parent;
@@ -82,7 +81,7 @@ void RedBlackTree::fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType
 			Node * sibling_point = grandParent_point->right;
 
 			//Scenario 1A: If the sibling of the parent of the child is also red: The parent and the sibling need to be recolored black, and the grandparent needs to be recolored red.
-			if (sibling_point != NULL && sibling_point->color == RED)
+			if (sibling_point != NULL  sibling_point->color == RED)
 			{
 				sibling_point->color = BLACK;
 				parent_point->color = BLACK;
@@ -114,7 +113,7 @@ void RedBlackTree::fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType
 			Node * sibling_point = grandParent_point->right;
 
 			//Scenario 2A: If the sibling of the parent of the child is also red: The parent and the sibling need to be recolored black, and the grandparent needs to be recolored red.
-			if (sibling_point != NULL && sibling_point->color == RED)
+			if (sibling_point != NULL  sibling_point->color == RED)
 			{
 				sibling_point->color = BLACK;
 				parent_point->color = BLACK;
@@ -145,10 +144,29 @@ void RedBlackTree::fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType
 
 }
 
-
+template<class ItemType>
+void RedBlackTree<ItemType>::insert(const int  n)
+{
+}
 
 template<class ItemType>
-void RedBlackTree<ItemType>::Display(RedBlackNode* root)
+void RedBlackTree<ItemType>::inorder()
+{
+}
+
+template<class ItemType>
+void RedBlackTree<ItemType>::levelOrder()
+{
+}
+
+template<class ItemType>
+void RedBlackTree<ItemType>::fixViolations(BinaryNode<ItemType>* root, BinaryNode<ItemType>* point)
+{
+}
+
+template<class ItemType>
+void RedBlackTree<ItemType>::display(RedBlackNode<ItemType>* root)
+{
 	if (root == Null)
 	{
 		cout << "Tree is empty" << endl;
@@ -160,7 +178,7 @@ void RedBlackTree<ItemType>::Display(RedBlackNode* root)
 		{
 			cout << "(BLACK) " << root->getItem() << endl;
 		}
-		else{
+		else {
 			cout << "(RED) " << root->getItem() << endl;
 		}
 
@@ -175,24 +193,25 @@ void RedBlackTree<ItemType>::Display(RedBlackNode* root)
 			p = root;
 			if (p->getColor() == BLACK)
 			{
-			cout << "(BLACK) " << p->getItem() << endl;
+				cout << "(BLACK) " << p->getItem() << endl;
 			}
 			else
 			{
-			cout << "(RED) " << p->getItem() << endl;
+				cout << "(RED) " << p->getItem() << endl;
 			}
 
-		cout << "." << endl;
+			cout << "." << endl;
 
 		}//end while
-		
+
 		display(p->getLeftChildPtr);
 		display(p->getRightChildPtr);
 
 	}
+}
 
 template<class ItemType>
-void RedBlackTree<ItemType>:: Delete(ItemType item)
+void RedBlackTree<ItemType>:: remove(ItemType item)
 {
   if (root == Null)
 	{
@@ -210,7 +229,7 @@ void RedBlackTree<ItemType>:: Delete(ItemType item)
 
 	bool found = false;
 
-	while (n0 != nullptr && !found)
+	while (n0 != nullptr  !found)
 	{
 		if (n0->getItem() == item)
 		{
@@ -231,7 +250,7 @@ void RedBlackTree<ItemType>:: Delete(ItemType item)
 
 	if (!found)
 	{
-		return;
+		return ;
 	}
 	else
 	{
@@ -294,7 +313,7 @@ template<class ItemType>
 void RedBlackTree<ItemType>::fixAfterDelete(ItemType item)
 {
 	RedBlackNode* newNode;
-	while (p != root && p->getColor() == BLACK)
+	while (p != root  p->getColor() == BLACK)
 	{
 		if ((p->getParent())->leftChildPtr() == p)
 		{
@@ -305,7 +324,7 @@ void RedBlackTree<ItemType>::fixAfterDelete(ItemType item)
 				(p->getParent())->setColor(RED);
 				rotateLeft(root, p->getParent());
 			}
-			if (newNode->getRightColor() == BLACK && newNode->getLeftColor() == BLACK)
+			if (newNode->getRightColor() == BLACK  newNode->getLeftColor() == BLACK)
 			{
 				newNode->setColor(RED);
 				p = p->getParent();

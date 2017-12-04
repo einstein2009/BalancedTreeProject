@@ -193,8 +193,7 @@ void A234Tree<ItemType>::remove()
 
 //Nick Ackors
 template<class ItemType> 
-QuadNode<ItemType>* A234Tree<ItemType>::
-locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
+QuadNode<ItemType>* A234Tree<ItemType>::locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target)
 {
 	//-------------------------------------
 	//FIRST CHECK MUST BE IF THE NODE IS FULL WHILE TRAVERSING THE TREE,
@@ -554,11 +553,12 @@ ItemType A234Tree<ItemType>::getRootLargeItem() const
 }
 
 //moving RBT pointer - Christy Broderick
-template<typename Key> typename Value inline converToRBT<Key, Value> & convertToRBT<Key, Value>::
+template<typename Key> 
+typename Value inline (converToRBT<Key, Value> & convertToRBT<Key, Value>):
 operator = (convertToRBT && 1hs) noexcept
 {
-tree_size = 1hs.tree_size;
-1hs.tree_size = 0;
-root = std::move(1hs.root);
+tree_size = lhs.tree_size;
+lhs.tree_size = 0;
+root = std::move(lhs.root);
 root->parent = nullptr;
 }

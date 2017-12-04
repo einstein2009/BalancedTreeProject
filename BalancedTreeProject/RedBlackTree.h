@@ -32,14 +32,16 @@ private:
 	BinaryNode<ItemType> *root;
 	void rotateLeft(BinaryNode<ItemType> *root, BinaryNode<ItemType> *point);
 	void rotateRight(BinaryNode<ItemType> *root, BinaryNode<ItemType> *point);
-	void fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType> *point)
+	void fixViolations(BinaryNode<ItemType> *root, BinaryNode<ItemType> *point);
 
 public:
 	RedBlackTree() { root = NULL; }
 	void insert(const int &n);
 	void inorder();
 	void levelOrder();
+	void remove(ItemType item);
+	void fixAfterDelete(ItemType item);
 	void fixViolations(BinaryNode<ItemType> *&root, BinaryNode<ItemType> *&point);
-	void Display(RedBlackNode<ItemType> *root);
+	void display(RedBlackNode<ItemType> *root);
 };
 #include "RedBlackTree.cpp"
