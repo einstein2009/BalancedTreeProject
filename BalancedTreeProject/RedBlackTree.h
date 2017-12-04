@@ -40,7 +40,7 @@ public:
 	void inorder();
 	void levelOrder();
 	void fixViolations(Node *&root, Node *&point);
-	void Display(Node *root);
+	void Display(RedBlackNode *root);
 };
 
 
