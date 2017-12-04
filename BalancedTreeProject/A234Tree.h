@@ -23,6 +23,7 @@ public:
 	void remove();
 	QuadNode<ItemType>* locateLeaf(QuadNode<ItemType>* subTreeNode, ItemType target);
 	void convertToRBT(QuadNode<ItemType>* root);
+	void convertToRBTStart();
 	int getRootDataCount() const;
 	ItemType getRootSmallItem() const;
 	ItemType getRootMidItem() const;
