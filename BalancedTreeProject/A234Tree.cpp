@@ -473,6 +473,12 @@ void A234Tree<ItemType>::convertToRBT(QuadNode<ItemType>* root)
 }
 
 template<class ItemType>
+void A234Tree<ItemType>::convertToRBTStart()
+{
+	convertToRBT(rootPtr);
+}
+
+template<class ItemType>
 int A234Tree<ItemType>::getRootDataCount() const
 {
 	return rootPtr->getDataCount();
