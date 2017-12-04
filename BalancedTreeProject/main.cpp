@@ -45,7 +45,7 @@ int getRemoveIndex(int arriArray[], int iDataItem, int iArrayLength);
 
 int main()
 {
-	A234Tree<int> *CpTreePtr; //pointer to 2-3-4 tree
+	A234Tree<int> *CpTreePtr = new A234Tree<int>(); //pointer to 2-3-4 tree
 	int iRandValue; // used to insert random values into tree
 	int arriFirstNumToRemove[37]; // stores 37 numbers to remove from 2-3-4 tree
 	int arriSecondNumToRemove[32]; // stores 32 numbers to remove from red-black tree
