@@ -1,3 +1,9 @@
+/***********************************************************
+*  Group A                                                 *
+*  Authors:       Rodel Aragon, Colby Abrahamoff,          *
+*                 Christsandra Broderick, Chandler Snoddy  *
+*                 Nicholas Ackors, Stephen Hall            *
+***********************************************************/
 //Assignment 6 Group A
 //Steve Hall
 //
