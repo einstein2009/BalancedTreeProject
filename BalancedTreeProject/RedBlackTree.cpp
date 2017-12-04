@@ -1,4 +1,9 @@
-
+/***********************************************************
+*  Group A                                                 *
+*  Authors:       Rodel Aragon, Colby Abrahamoff,          *
+*                 Christsandra Broderick, Chandler Snoddy  *
+*                 Nicholas Ackors, Stephen Hall            *
+***********************************************************/
 #include "stdafx.h"
 #pragma once
 
