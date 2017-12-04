@@ -201,7 +201,7 @@ int main()
 
 	cout << "Converting 2-3-4 tree to a Red-Black Tree..." << endl << endl;
 	//convert 2-3-4 tree to red-black by passing pointer to constructor of red-black tree
-	CpTreePtr->convertToRBT();
+	CpTreePtr->convertToRBTStart();
 
 	RedBlackTree<int> *CpRedBlackTreePtr;
 
